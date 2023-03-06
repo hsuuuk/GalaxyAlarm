@@ -26,6 +26,7 @@ class SoundController: UIViewController {
         let tableView = UITableView(frame: view.frame, style: .insetGrouped)
         view.addSubview(tableView)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: "header")
         tableView.dataSource = self
         tableView.delegate = self
         tableView.isScrollEnabled = false
@@ -34,29 +35,62 @@ class SoundController: UIViewController {
 }
 
 extension SoundController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        7
+        if section == 0 {
+            return 1
+        } else {
+            return bellSound.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
         cell.backgroundColor = .systemGray6
-        cell.textLabel?.text = day[indexPath.row]
+        if indexPath.section == 0 {
+            cell.textLabel?.text = "진동"
+            cell.detailTextLabel?.text = "동기화됨"
+            cell.accessoryType = .disclosureIndicator
+        } else {
+            cell.textLabel?.text = bellSound[indexPath.row]
+        }
         return cell
     }
 }
 
 extension SoundController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) {
-            cell.tintColor = .systemOrange
-            if cell.accessoryType == .checkmark {
-                cell.accessoryType = .none
-            } else {
-                cell.accessoryType = .checkmark
+        if indexPath.section == 0 {
+            
+        } else {
+            if let selectedCell = tableView.cellForRow(at: indexPath) {
+                selectedCell.tintColor = .systemOrange
+                if selectedCell.accessoryType == .checkmark {
+                    selectedCell.accessoryType = .none
+                } else {
+                    selectedCell.accessoryType = .checkmark
+                }
+                
+                for cell in tableView.visibleCells {
+                    if cell != selectedCell {
+                        cell.accessoryType = .none
+                    }
+                }
             }
         }
     }
-}
     
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = UITableViewHeaderFooterView(reuseIdentifier: "header")
+        if section == 1 {
+            header.textLabel?.text = "벨소리"
+        }
+        return header
+    }
+}
+
 

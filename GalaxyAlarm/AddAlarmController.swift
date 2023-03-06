@@ -70,7 +70,7 @@ class AddAlarmController: UIViewController {
 
 extension AddAlarmController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -112,9 +112,11 @@ extension AddAlarmController: UITableViewDataSource {
 
 extension AddAlarmController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            let controller = RepeatController()
-            navigationController?.pushViewController(controller, animated: true)
+        switch indexPath.item {
+        case 0:
+            navigationController?.pushViewController(RepeatController(), animated: true)
+        default :
+            navigationController?.pushViewController(SoundController(), animated: true)
         }
     }
 }
