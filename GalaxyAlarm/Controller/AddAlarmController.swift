@@ -7,7 +7,20 @@
 
 import UIKit
 
+protocol AddAlarmControllerDelegate: AnyObject {
+    func didAddAlarm()
+}
+
 class AddAlarmController: UIViewController {
+    
+    var alarmData = AlarmData(midday: "오전", time: "7:42", day: [])
+    let datePicker = UIDatePicker()
+    let dataManager = CoreDataManager.shared
+    weak var delegate: AddAlarmControllerDelegate?
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print(alarmData)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,24 +40,21 @@ class AddAlarmController: UIViewController {
         leftBarButton.tintColor = .black
         navigationItem.leftBarButtonItem = leftBarButton
         
-        let datePicker = UIDatePicker()
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .time
         datePicker.locale = Locale(identifier: "ko-KR")
         datePicker.setValue(UIColor.white, forKeyPath: "textColor")
         datePicker.date = Date()
         datePicker.timeZone = .autoupdatingCurrent
-        datePicker.addTarget(self, action: #selector(handleDatePicker), for: .valueChanged)
         view.addSubview(datePicker)
         datePicker.snp.makeConstraints { make in
             make.top.left.right.equalTo(view.safeAreaLayoutGuide)
-            //make.height.equalTo(200)
         }
         
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(datePicker.snp.bottom).offset(-10)
+            make.top.equalTo(datePicker.snp.bottom).offset(-25)
             make.left.bottom.right.equalToSuperview()
         }
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -55,12 +65,20 @@ class AddAlarmController: UIViewController {
         tableView.backgroundColor = .clear
     }
     
-    @objc func handleDatePicker() {
-        
-    }
-    
     @objc func rightBarButtonTapped() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "a"
+        let midday = formatter.string(from: datePicker.date)
+        formatter.dateFormat = "h:mm"
+        let timeString = formatter.string(from: datePicker.date)
         
+        alarmData.midday = midday
+        alarmData.time = timeString
+        
+        dataManager.addAlarm(data: alarmData) {
+            self.delegate?.didAddAlarm()
+            self.navigationController?.dismiss(animated: true)
+        }
     }
     
     @objc func leftBarButtonTapped() {
@@ -85,7 +103,7 @@ extension AddAlarmController: UITableViewDataSource {
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "반복"
-                cell.detailTextLabel?.text = "없음"
+                cell.detailTextLabel?.text = "안 함"
                 cell.accessoryType = .disclosureIndicator
             case 2:
                 cell.textLabel?.text = "사운드"
@@ -99,11 +117,6 @@ extension AddAlarmController: UITableViewDataSource {
                 cell.textLabel?.text = "공휴일엔 알람 끄기"
                 let switchButton = UISwitch()
                 cell.accessoryView = switchButton
-                if switchButton.isOn {
-                    print("on")
-                } else {
-                    print("off")
-                }
             }
             return cell
         }

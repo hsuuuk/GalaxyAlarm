@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		53B0706343433EE5EBCEA50D /* Pods_GalaxyAlarm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80FAD80095844BFC810FDD43 /* Pods_GalaxyAlarm.framework */; };
+		8FA8111129B7352000D83FB2 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA8111029B7352000D83FB2 /* CoreDataManager.swift */; };
+		8FA8111429B735CF00D83FB2 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8FA8111229B735CF00D83FB2 /* Model.xcdatamodeld */; };
 		8FAA559D29B2E6900043CED4 /* AddAlarmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA559C29B2E6900043CED4 /* AddAlarmController.swift */; };
 		8FAA559F29B2E99A0043CED4 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA559E29B2E99A0043CED4 /* MainController.swift */; };
-		8FAA55A129B2ED270043CED4 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA55A029B2ED270043CED4 /* Data.swift */; };
+		8FAA55A129B2ED270043CED4 /* AlarmData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA55A029B2ED270043CED4 /* AlarmData.swift */; };
 		8FAA562D29B5F1BB0043CED4 /* TFCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA562C29B5F1BB0043CED4 /* TFCell.swift */; };
 		8FAA562F29B612170043CED4 /* RepeatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA562E29B612170043CED4 /* RepeatController.swift */; };
 		8FAA563129B6166D0043CED4 /* SoundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA563029B6166D0043CED4 /* SoundController.swift */; };
@@ -24,9 +26,11 @@
 /* Begin PBXFileReference section */
 		560867303B1CB4B6C8114373 /* Pods-GalaxyAlarm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GalaxyAlarm.debug.xcconfig"; path = "Target Support Files/Pods-GalaxyAlarm/Pods-GalaxyAlarm.debug.xcconfig"; sourceTree = "<group>"; };
 		80FAD80095844BFC810FDD43 /* Pods_GalaxyAlarm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GalaxyAlarm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8FA8111029B7352000D83FB2 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		8FA8111329B735CF00D83FB2 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
 		8FAA559C29B2E6900043CED4 /* AddAlarmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlarmController.swift; sourceTree = "<group>"; };
 		8FAA559E29B2E99A0043CED4 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
-		8FAA55A029B2ED270043CED4 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		8FAA55A029B2ED270043CED4 /* AlarmData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmData.swift; sourceTree = "<group>"; };
 		8FAA562C29B5F1BB0043CED4 /* TFCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFCell.swift; sourceTree = "<group>"; };
 		8FAA562E29B612170043CED4 /* RepeatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatController.swift; sourceTree = "<group>"; };
 		8FAA563029B6166D0043CED4 /* SoundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundController.swift; sourceTree = "<group>"; };
@@ -53,6 +57,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8FA8111529B7366000D83FB2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8FA8111029B7352000D83FB2 /* CoreDataManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8FA8111629B7366B00D83FB2 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				8FAA55A029B2ED270043CED4 /* AlarmData.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		8FA8111729B7367400D83FB2 /* Veiw */ = {
+			isa = PBXGroup;
+			children = (
+				8FF5BF1929B247D8007DC508 /* Cell.swift */,
+				8FAA562C29B5F1BB0043CED4 /* TFCell.swift */,
+			);
+			path = Veiw;
+			sourceTree = "<group>";
+		};
+		8FA8111829B7367E00D83FB2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8FAA559E29B2E99A0043CED4 /* MainController.swift */,
+				8FAA559C29B2E6900043CED4 /* AddAlarmController.swift */,
+				8FAA562E29B612170043CED4 /* RepeatController.swift */,
+				8FAA563029B6166D0043CED4 /* SoundController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		8FF5BEF929B247CF007DC508 = {
 			isa = PBXGroup;
 			children = (
@@ -76,17 +116,15 @@
 			children = (
 				8FF5BF0529B247CF007DC508 /* AppDelegate.swift */,
 				8FF5BF0729B247CF007DC508 /* SceneDelegate.swift */,
-				8FAA55A029B2ED270043CED4 /* Data.swift */,
-				8FAA559E29B2E99A0043CED4 /* MainController.swift */,
-				8FF5BF1929B247D8007DC508 /* Cell.swift */,
-				8FAA559C29B2E6900043CED4 /* AddAlarmController.swift */,
-				8FAA562C29B5F1BB0043CED4 /* TFCell.swift */,
-				8FAA562E29B612170043CED4 /* RepeatController.swift */,
-				8FAA563029B6166D0043CED4 /* SoundController.swift */,
+				8FA8111529B7366000D83FB2 /* Model */,
+				8FA8111629B7366B00D83FB2 /* Data */,
+				8FA8111729B7367400D83FB2 /* Veiw */,
+				8FA8111829B7367E00D83FB2 /* Controller */,
 				8FF5BF0B29B247CF007DC508 /* Main.storyboard */,
 				8FF5BF0E29B247D1007DC508 /* Assets.xcassets */,
 				8FF5BF1029B247D1007DC508 /* LaunchScreen.storyboard */,
 				8FF5BF1329B247D1007DC508 /* Info.plist */,
+				8FA8111229B735CF00D83FB2 /* Model.xcdatamodeld */,
 			);
 			path = GalaxyAlarm;
 			sourceTree = "<group>";
@@ -223,13 +261,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FF5BF1A29B247D8007DC508 /* Cell.swift in Sources */,
-				8FAA55A129B2ED270043CED4 /* Data.swift in Sources */,
+				8FAA55A129B2ED270043CED4 /* AlarmData.swift in Sources */,
 				8FF5BF0629B247CF007DC508 /* AppDelegate.swift in Sources */,
+				8FA8111429B735CF00D83FB2 /* Model.xcdatamodeld in Sources */,
 				8FF5BF0829B247CF007DC508 /* SceneDelegate.swift in Sources */,
 				8FAA559F29B2E99A0043CED4 /* MainController.swift in Sources */,
 				8FAA562D29B5F1BB0043CED4 /* TFCell.swift in Sources */,
 				8FAA562F29B612170043CED4 /* RepeatController.swift in Sources */,
 				8FAA563129B6166D0043CED4 /* SoundController.swift in Sources */,
+				8FA8111129B7352000D83FB2 /* CoreDataManager.swift in Sources */,
 				8FAA559D29B2E6900043CED4 /* AddAlarmController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -450,6 +490,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8FA8111229B735CF00D83FB2 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8FA8111329B735CF00D83FB2 /* CoreData.xcdatamodel */,
+			);
+			currentVersion = 8FA8111329B735CF00D83FB2 /* CoreData.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 8FF5BEFA29B247CF007DC508 /* Project object */;
 }

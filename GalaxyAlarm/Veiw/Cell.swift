@@ -13,14 +13,19 @@ class Cell: UITableViewCell {
     var middayLabel: UILabel = {
         let lb = UILabel()
         lb.font = UIFont.systemFont(ofSize: 35)
-        lb.text = "오전"
         return lb
     }()
     
     var timeLabel: UILabel = {
         let lb = UILabel()
         lb.font = UIFont.systemFont(ofSize: 55, weight: .light)
-        lb.text = "7:20"
+        return lb
+    }()
+    
+    var dayLabel: UILabel = {
+        let lb = UILabel()
+        lb.font = UIFont.systemFont(ofSize: 15)
+        lb.text = "알람, 매일"
         return lb
     }()
     
@@ -37,13 +42,19 @@ class Cell: UITableViewCell {
         addSubview(middayLabel)
         middayLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(20)
-            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(24)
         }
         
         addSubview(timeLabel)
         timeLabel.snp.makeConstraints { make in
             make.left.equalTo(middayLabel.snp.right)
-            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(5)
+        }
+        
+        addSubview(dayLabel)
+        dayLabel.snp.makeConstraints { make in
+            make.top.equalTo(middayLabel.snp.bottom).offset(5)
+            make.left.equalToSuperview().offset(20)
         }
     }
 }

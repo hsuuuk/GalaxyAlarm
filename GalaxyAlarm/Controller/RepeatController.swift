@@ -48,12 +48,24 @@ extension RepeatController: UITableViewDataSource {
 
 extension RepeatController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let controller = AddAlarmController()
+        
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.tintColor = .systemOrange
-            if cell.accessoryType == .checkmark {
-                cell.accessoryType = .none
-            } else {
+            if cell.accessoryType == .none {
                 cell.accessoryType = .checkmark
+                guard let day = cell.textLabel?.text else { return }
+                if !controller.alarmData.day.contains(day) {
+                    controller.alarmData.day.append(day)
+                    print(controller.alarmData.day)
+                }
+            } else {
+                cell.accessoryType = .none
+                guard let day = cell.textLabel?.text else { return }
+                if controller.alarmData.day.contains(day), let index = controller.alarmData.day.firstIndex(of: day) {
+                    controller.alarmData.day.remove(at: index)
+                    print(controller.alarmData.day)
+                }
             }
         }
     }
