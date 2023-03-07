@@ -7,9 +7,15 @@
 
 import UIKit
 
+protocol RepeatControllerDelegate: AnyObject {
+    func updateDay(controller: RepeatController, dayBool: [Bool])
+}
+
 class RepeatController: UIViewController {
     
     let day = ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"]
+    
+    weak var delegate: RepeatControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,27 +54,11 @@ extension RepeatController: UITableViewDataSource {
 
 extension RepeatController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let controller = AddAlarmController()
-        
-        if let cell = tableView.cellForRow(at: indexPath) {
-            cell.tintColor = .systemOrange
-            if cell.accessoryType == .none {
-                cell.accessoryType = .checkmark
-                guard let day = cell.textLabel?.text else { return }
-                if !controller.alarmData.day.contains(day) {
-                    controller.alarmData.day.append(day)
-                    print(controller.alarmData.day)
-                }
-            } else {
-                cell.accessoryType = .none
-                guard let day = cell.textLabel?.text else { return }
-                if controller.alarmData.day.contains(day), let index = controller.alarmData.day.firstIndex(of: day) {
-                    controller.alarmData.day.remove(at: index)
-                    print(controller.alarmData.day)
-                }
-            }
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
+        cell.tintColor = .systemOrange
+        let isCellChecked = (cell.accessoryType == .none)
+        cell.accessoryType = isCellChecked ? .checkmark : .none
         }
-    }
 }
     
 

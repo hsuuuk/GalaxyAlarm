@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import UserNotifications
 
 class MainController: UIViewController {
     
@@ -18,7 +19,7 @@ class MainController: UIViewController {
         configure()
         fetchData()
     }
-    
+
     func fetchData() {
         dataManager.fetchAlarmList()
     }
@@ -92,6 +93,31 @@ extension MainController: AddAlarmControllerDelegate {
     func didAddAlarm() {
         dataManager.fetchAlarmList()
         tableView.reloadData()
+    }
+}
+
+extension MainController {
+    func setLocalNoti() {
+        let center = UNUserNotificationCenter.current()
+        let content = UNMutableNotificationContent()
+        //let alarm = dataManager.alarmList
+        content.title = "알람 타이틀"
+        content.body = "알람 내용"
+        content.sound = UNNotificationSound.default
+
+        let date = Date(timeIntervalSinceNow: 60) // 1분 후 알람
+        let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+
+        let request = UNNotificationRequest(identifier: "알림 ID", content: content, trigger: trigger)
+
+        center.add(request) { (error) in
+            if let error = error {
+                print("알림 등록 실패: \(error.localizedDescription)")
+            } else {
+                print("알림 등록 성공")
+            }
+        }
     }
 }
 

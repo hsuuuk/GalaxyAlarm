@@ -10,7 +10,7 @@ import UIKit
 struct AlarmData {
     var midday: String
     var time: String
-    var day: [String]
+    var days: [Bool]
 //    var title: String
 //    var sound: String
 }

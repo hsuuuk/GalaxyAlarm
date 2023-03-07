@@ -13,7 +13,7 @@ protocol AddAlarmControllerDelegate: AnyObject {
 
 class AddAlarmController: UIViewController {
     
-    var alarmData = AlarmData(midday: "오전", time: "7:42", day: [])
+    var alarmData = AlarmData(midday: "오전", time: "7:42", days: [true, false, false, false, false, false, false])
     let datePicker = UIDatePicker()
     let dataManager = CoreDataManager.shared
     weak var delegate: AddAlarmControllerDelegate?
@@ -58,7 +58,7 @@ class AddAlarmController: UIViewController {
             make.left.bottom.right.equalToSuperview()
         }
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.register(TFCell.self, forCellReuseIdentifier: "tfcell")
+        tableView.register(AddCell.self, forCellReuseIdentifier: "AddCell")
         tableView.dataSource = self
         tableView.delegate = self
         tableView.isScrollEnabled = false
@@ -93,7 +93,7 @@ extension AddAlarmController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "tfcell", for: indexPath) as! TFCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AddCell", for: indexPath) as! AddCell
             cell.backgroundColor = .systemGray6
             return cell
         } else {

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class TFCell: UITableViewCell {
+class AddCell: UITableViewCell {
     
     var titleLabel: UILabel = {
         let lb = UILabel()

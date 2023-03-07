@@ -13,7 +13,7 @@
 		8FAA559D29B2E6900043CED4 /* AddAlarmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA559C29B2E6900043CED4 /* AddAlarmController.swift */; };
 		8FAA559F29B2E99A0043CED4 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA559E29B2E99A0043CED4 /* MainController.swift */; };
 		8FAA55A129B2ED270043CED4 /* AlarmData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA55A029B2ED270043CED4 /* AlarmData.swift */; };
-		8FAA562D29B5F1BB0043CED4 /* TFCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA562C29B5F1BB0043CED4 /* TFCell.swift */; };
+		8FAA562D29B5F1BB0043CED4 /* AddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA562C29B5F1BB0043CED4 /* AddCell.swift */; };
 		8FAA562F29B612170043CED4 /* RepeatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA562E29B612170043CED4 /* RepeatController.swift */; };
 		8FAA563129B6166D0043CED4 /* SoundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA563029B6166D0043CED4 /* SoundController.swift */; };
 		8FF5BF0629B247CF007DC508 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF5BF0529B247CF007DC508 /* AppDelegate.swift */; };
@@ -31,7 +31,7 @@
 		8FAA559C29B2E6900043CED4 /* AddAlarmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlarmController.swift; sourceTree = "<group>"; };
 		8FAA559E29B2E99A0043CED4 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		8FAA55A029B2ED270043CED4 /* AlarmData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmData.swift; sourceTree = "<group>"; };
-		8FAA562C29B5F1BB0043CED4 /* TFCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFCell.swift; sourceTree = "<group>"; };
+		8FAA562C29B5F1BB0043CED4 /* AddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCell.swift; sourceTree = "<group>"; };
 		8FAA562E29B612170043CED4 /* RepeatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatController.swift; sourceTree = "<group>"; };
 		8FAA563029B6166D0043CED4 /* SoundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundController.swift; sourceTree = "<group>"; };
 		8FF5BF0229B247CF007DC508 /* GalaxyAlarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GalaxyAlarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,7 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				8FF5BF1929B247D8007DC508 /* Cell.swift */,
-				8FAA562C29B5F1BB0043CED4 /* TFCell.swift */,
+				8FAA562C29B5F1BB0043CED4 /* AddCell.swift */,
 			);
 			path = Veiw;
 			sourceTree = "<group>";
@@ -266,7 +266,7 @@
 				8FA8111429B735CF00D83FB2 /* Model.xcdatamodeld in Sources */,
 				8FF5BF0829B247CF007DC508 /* SceneDelegate.swift in Sources */,
 				8FAA559F29B2E99A0043CED4 /* MainController.swift in Sources */,
-				8FAA562D29B5F1BB0043CED4 /* TFCell.swift in Sources */,
+				8FAA562D29B5F1BB0043CED4 /* AddCell.swift in Sources */,
 				8FAA562F29B612170043CED4 /* RepeatController.swift in Sources */,
 				8FAA563129B6166D0043CED4 /* SoundController.swift in Sources */,
 				8FA8111129B7352000D83FB2 /* CoreDataManager.swift in Sources */,
