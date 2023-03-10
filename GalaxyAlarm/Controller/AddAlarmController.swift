@@ -13,7 +13,7 @@ protocol AddAlarmControllerDelegate: AnyObject {
 
 class AddAlarmController: UIViewController {
     
-    var alarmData = AlarmData(time: "7:42", midday: "오전")
+    var alarmData: AlarmData?
     let datePicker = UIDatePicker()
     weak var delegate: AddAlarmControllerDelegate?
     
@@ -61,17 +61,11 @@ class AddAlarmController: UIViewController {
     }
     
     @objc func rightBarButtonTapped() {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "a"
-        let midday = formatter.string(from: datePicker.date)
-        formatter.dateFormat = "h:mm"
-        let timeString = formatter.string(from: datePicker.date)
-        
-        alarmData.midday = midday
-        alarmData.time = timeString
-        
-        delegate?.saveAlarmInfo(alarmData: alarmData)
-        navigationController?.dismiss(animated: true)
+        alarmData = AlarmData(date: datePicker.date)
+        if let alarmData = alarmData {
+            delegate?.saveAlarmInfo(alarmData: alarmData)
+            navigationController?.dismiss(animated: true)
+        }
     }
     
     @objc func leftBarButtonTapped() {

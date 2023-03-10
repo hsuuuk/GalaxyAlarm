@@ -12,6 +12,11 @@ import UserNotifications
 class MainController: UIViewController {
     
     let tableView = UITableView(frame: .zero, style: .plain)
+    var alarmList: [AlarmData] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,19 +58,19 @@ class MainController: UIViewController {
 
 extension MainController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return alarmList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! Cell
-        cell.middayLabel.text = "오전"
-        cell.timeLabel.text = "7:22"
+        cell.middayLabel.text = alarmList[indexPath.row].date.toString(format: "a")
+        cell.timeLabel.text = alarmList[indexPath.row].date.toString(format: "h:mm")
         return cell
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .normal, title: "삭제") { (_, _, success: @escaping (Bool) -> Void) in
-            print("delete")
+            self.alarmList.remove(at: indexPath.row)
             self.tableView.reloadData()
             success(true)
         }
@@ -81,7 +86,7 @@ extension MainController: UITableViewDelegate {
 
 extension MainController: AddAlarmControllerDelegate {
     func saveAlarmInfo(alarmData: AlarmData) {
-        <#code#>
+        alarmList.append(alarmData)
     }
 }
 
