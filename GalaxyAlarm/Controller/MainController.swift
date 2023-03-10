@@ -12,18 +12,12 @@ import UserNotifications
 class MainController: UIViewController {
     
     let tableView = UITableView(frame: .zero, style: .plain)
-    let dataManager = CoreDataManager.shared
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        fetchData()
     }
-
-    func fetchData() {
-        dataManager.fetchAlarmList()
-    }
-
+    
     func configure() {
         view.backgroundColor = .white
         
@@ -59,24 +53,20 @@ class MainController: UIViewController {
 
 extension MainController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataManager.alarmList.count
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! Cell
-        cell.middayLabel.text = dataManager.alarmList[indexPath.row].midday
-        cell.timeLabel.text = dataManager.alarmList[indexPath.row].time
+        cell.middayLabel.text = "오전"
+        cell.timeLabel.text = "7:22"
         return cell
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .normal, title: "삭제") { (_, _, success: @escaping (Bool) -> Void) in
-            
-            let deletedAlarm = self.dataManager.alarmList[indexPath.row]
-            self.dataManager.deleteAlarm(data: deletedAlarm) {
-                self.dataManager.fetchAlarmList()
-                self.tableView.reloadData()
-            }
+            print("delete")
+            self.tableView.reloadData()
             success(true)
         }
         delete.backgroundColor = .systemRed
@@ -91,8 +81,7 @@ extension MainController: UITableViewDelegate {
 
 extension MainController: AddAlarmControllerDelegate {
     func didAddAlarm() {
-        dataManager.fetchAlarmList()
-        tableView.reloadData()
+        
     }
 }
 
@@ -100,8 +89,7 @@ extension MainController {
     func setLocalNoti() {
         let center = UNUserNotificationCenter.current()
         let content = UNMutableNotificationContent()
-        //let alarm = dataManager.alarmList
-        content.title = "알람 타이틀"
+        content.title = "알람"
         content.body = "알람 내용"
         content.sound = UNNotificationSound.default
 

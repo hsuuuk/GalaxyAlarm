@@ -13,14 +13,9 @@ protocol AddAlarmControllerDelegate: AnyObject {
 
 class AddAlarmController: UIViewController {
     
-    var alarmData = AlarmData(midday: "오전", time: "7:42", days: [true, false, false, false, false, false, false])
+    var alarmData = AlarmData(time: "7:42", midday: "오전")
     let datePicker = UIDatePicker()
-    let dataManager = CoreDataManager.shared
     weak var delegate: AddAlarmControllerDelegate?
-    
-    override func viewWillAppear(_ animated: Bool) {
-        print(alarmData)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,10 +70,8 @@ class AddAlarmController: UIViewController {
         alarmData.midday = midday
         alarmData.time = timeString
         
-        dataManager.addAlarm(data: alarmData) {
-            self.delegate?.didAddAlarm()
-            self.navigationController?.dismiss(animated: true)
-        }
+        delegate?.didAddAlarm()
+        navigationController?.dismiss(animated: true)
     }
     
     @objc func leftBarButtonTapped() {

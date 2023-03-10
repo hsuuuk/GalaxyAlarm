@@ -8,9 +8,32 @@
 import UIKit
 
 struct AlarmData {
-    var midday: String
     var time: String
-    var days: [Bool]
-//    var title: String
+    var midday: String
+//    var name: String
 //    var sound: String
+//    var isActive: Bool
+//    var repeatDays: [Weekday]
+//    var snoozeTime: Int
+    
+    static func createTime(hour: Int, minute: Int) -> Date {
+        let currentDate = Date()
+        let calendar = Calendar.current
+        //let dateComponent = DateComponents
+        let dateComponents = calendar.dateComponents([.year, .month, .day], from: currentDate)
+        
+        var newDateComponents = DateComponents()
+        newDateComponents.year = dateComponents.year
+        newDateComponents.month = dateComponents.month
+        newDateComponents.day = dateComponents.day
+        newDateComponents.hour = hour
+        newDateComponents.minute = minute
+        
+        let newDate = calendar.date(from: newDateComponents)!
+        return newDate
+    }
+}
+
+enum Weekday: Int {
+    case sunday, monday, tuesday, wednesday, thursday, friday, saturday
 }
