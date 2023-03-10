@@ -14,7 +14,7 @@
 		8FAA562D29B5F1BB0043CED4 /* AddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA562C29B5F1BB0043CED4 /* AddCell.swift */; };
 		8FAA562F29B612170043CED4 /* RepeatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA562E29B612170043CED4 /* RepeatController.swift */; };
 		8FAA563129B6166D0043CED4 /* SoundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA563029B6166D0043CED4 /* SoundController.swift */; };
-		8FC82B7229BAD1E900E63D8E /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC82B7129BAD1E900E63D8E /* DataExtension.swift */; };
+		8FC82B7229BAD1E900E63D8E /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC82B7129BAD1E900E63D8E /* DateExtension.swift */; };
 		8FC82B7429BAD21100E63D8E /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC82B7329BAD21100E63D8E /* Notification.swift */; };
 		8FF5BF0629B247CF007DC508 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF5BF0529B247CF007DC508 /* AppDelegate.swift */; };
 		8FF5BF0829B247CF007DC508 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF5BF0729B247CF007DC508 /* SceneDelegate.swift */; };
@@ -32,7 +32,7 @@
 		8FAA562C29B5F1BB0043CED4 /* AddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCell.swift; sourceTree = "<group>"; };
 		8FAA562E29B612170043CED4 /* RepeatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatController.swift; sourceTree = "<group>"; };
 		8FAA563029B6166D0043CED4 /* SoundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundController.swift; sourceTree = "<group>"; };
-		8FC82B7129BAD1E900E63D8E /* DataExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
+		8FC82B7129BAD1E900E63D8E /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		8FC82B7329BAD21100E63D8E /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		8FF5BF0229B247CF007DC508 /* GalaxyAlarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GalaxyAlarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FF5BF0529B247CF007DC508 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 		8FC82B7029BAD1D600E63D8E /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				8FC82B7129BAD1E900E63D8E /* DataExtension.swift */,
+				8FC82B7129BAD1E900E63D8E /* DateExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -261,7 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FF5BF1A29B247D8007DC508 /* Cell.swift in Sources */,
-				8FC82B7229BAD1E900E63D8E /* DataExtension.swift in Sources */,
+				8FC82B7229BAD1E900E63D8E /* DateExtension.swift in Sources */,
 				8FAA55A129B2ED270043CED4 /* AlarmData.swift in Sources */,
 				8FF5BF0629B247CF007DC508 /* AppDelegate.swift in Sources */,
 				8FF5BF0829B247CF007DC508 /* SceneDelegate.swift in Sources */,

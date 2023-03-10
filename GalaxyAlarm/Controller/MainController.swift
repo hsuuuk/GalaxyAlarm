@@ -80,8 +80,8 @@ extension MainController: UITableViewDelegate {
 }
 
 extension MainController: AddAlarmControllerDelegate {
-    func didAddAlarm() {
-        
+    func saveAlarmInfo(alarmData: AlarmData) {
+        <#code#>
     }
 }
 

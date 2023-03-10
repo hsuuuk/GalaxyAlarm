@@ -8,7 +8,7 @@
 import UIKit
 
 protocol AddAlarmControllerDelegate: AnyObject {
-    func didAddAlarm()
+    func saveAlarmInfo(alarmData: AlarmData)
 }
 
 class AddAlarmController: UIViewController {
@@ -70,7 +70,7 @@ class AddAlarmController: UIViewController {
         alarmData.midday = midday
         alarmData.time = timeString
         
-        delegate?.didAddAlarm()
+        delegate?.saveAlarmInfo(alarmData: alarmData)
         navigationController?.dismiss(animated: true)
     }
     

@@ -6,13 +6,20 @@
 //
 
 import UIKit
-import CoreData
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+            if granted {
+                print("알림 권한 허용")
+            } else {
+                print("알림 권한 거부")
+            }
+        }
+        UNUserNotificationCenter.current().delegate = self
+        
         return true
     }
     
@@ -30,3 +37,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 }
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    // 로컬 알림 도착 시 처리
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        print("푸시 알림을 터치하면 발생하는 메서드")
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        print("앱 실행중일 때, 푸시 알림이 생성되면 발생하는 메서드")
+        //completionHandler([[.alert, .sound, .badge]])
+    }
+}
+
