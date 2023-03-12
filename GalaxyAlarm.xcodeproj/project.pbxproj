@@ -15,8 +15,10 @@
 		8FAA562F29B612170043CED4 /* RepeatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA562E29B612170043CED4 /* RepeatController.swift */; };
 		8FAA563129B6166D0043CED4 /* SoundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA563029B6166D0043CED4 /* SoundController.swift */; };
 		8FC82B7229BAD1E900E63D8E /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC82B7129BAD1E900E63D8E /* DateExtension.swift */; };
-		8FC82B7429BAD21100E63D8E /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC82B7329BAD21100E63D8E /* Notification.swift */; };
+		8FC82B7429BAD21100E63D8E /* UserNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC82B7329BAD21100E63D8E /* UserNotification.swift */; };
 		8FC82B7629BD6BF000E63D8E /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC82B7529BD6BEF00E63D8E /* WeekDay.swift */; };
+		8FC82B7829BDF29B00E63D8E /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC82B7729BDF29B00E63D8E /* CoreDataManager.swift */; };
+		8FC82B7C29BDF33E00E63D8E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8FC82B7929BDF33E00E63D8E /* Model.xcdatamodeld */; };
 		8FF5BF0629B247CF007DC508 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF5BF0529B247CF007DC508 /* AppDelegate.swift */; };
 		8FF5BF0829B247CF007DC508 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF5BF0729B247CF007DC508 /* SceneDelegate.swift */; };
 		8FF5BF0F29B247D1007DC508 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FF5BF0E29B247D1007DC508 /* Assets.xcassets */; };
@@ -34,8 +36,11 @@
 		8FAA562E29B612170043CED4 /* RepeatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatController.swift; sourceTree = "<group>"; };
 		8FAA563029B6166D0043CED4 /* SoundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundController.swift; sourceTree = "<group>"; };
 		8FC82B7129BAD1E900E63D8E /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
-		8FC82B7329BAD21100E63D8E /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		8FC82B7329BAD21100E63D8E /* UserNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotification.swift; sourceTree = "<group>"; };
 		8FC82B7529BD6BEF00E63D8E /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
+		8FC82B7729BDF29B00E63D8E /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		8FC82B7A29BDF33E00E63D8E /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
+		8FC82B7B29BDF33E00E63D8E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		8FF5BF0229B247CF007DC508 /* GalaxyAlarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GalaxyAlarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FF5BF0529B247CF007DC508 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FF5BF0729B247CF007DC508 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,7 +69,8 @@
 			children = (
 				8FAA55A029B2ED270043CED4 /* AlarmData.swift */,
 				8FC82B7529BD6BEF00E63D8E /* WeekDay.swift */,
-				8FC82B7329BAD21100E63D8E /* Notification.swift */,
+				8FC82B7329BAD21100E63D8E /* UserNotification.swift */,
+				8FC82B7729BDF29B00E63D8E /* CoreDataManager.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -97,6 +103,13 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		8FC82B7D29BE012C00E63D8E /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
 		8FF5BEF929B247CF007DC508 = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +133,7 @@
 			children = (
 				8FF5BF0529B247CF007DC508 /* AppDelegate.swift */,
 				8FF5BF0729B247CF007DC508 /* SceneDelegate.swift */,
+				8FC82B7D29BE012C00E63D8E /* Sound */,
 				8FC82B7029BAD1D600E63D8E /* Extension */,
 				8FA8111629B7366B00D83FB2 /* Data */,
 				8FA8111729B7367400D83FB2 /* Veiw */,
@@ -128,6 +142,7 @@
 				8FF5BF0E29B247D1007DC508 /* Assets.xcassets */,
 				8FF5BF1029B247D1007DC508 /* LaunchScreen.storyboard */,
 				8FF5BF1329B247D1007DC508 /* Info.plist */,
+				8FC82B7929BDF33E00E63D8E /* Model.xcdatamodeld */,
 			);
 			path = GalaxyAlarm;
 			sourceTree = "<group>";
@@ -266,11 +281,13 @@
 				8FF5BF1A29B247D8007DC508 /* MainCell.swift in Sources */,
 				8FC82B7229BAD1E900E63D8E /* DateExtension.swift in Sources */,
 				8FC82B7629BD6BF000E63D8E /* WeekDay.swift in Sources */,
+				8FC82B7C29BDF33E00E63D8E /* Model.xcdatamodeld in Sources */,
 				8FAA55A129B2ED270043CED4 /* AlarmData.swift in Sources */,
 				8FF5BF0629B247CF007DC508 /* AppDelegate.swift in Sources */,
 				8FF5BF0829B247CF007DC508 /* SceneDelegate.swift in Sources */,
 				8FAA559F29B2E99A0043CED4 /* MainController.swift in Sources */,
-				8FC82B7429BAD21100E63D8E /* Notification.swift in Sources */,
+				8FC82B7829BDF29B00E63D8E /* CoreDataManager.swift in Sources */,
+				8FC82B7429BAD21100E63D8E /* UserNotification.swift in Sources */,
 				8FAA562D29B5F1BB0043CED4 /* AddTitleCell.swift in Sources */,
 				8FAA562F29B612170043CED4 /* RepeatController.swift in Sources */,
 				8FAA563129B6166D0043CED4 /* SoundController.swift in Sources */,
@@ -494,6 +511,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8FC82B7929BDF33E00E63D8E /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8FC82B7A29BDF33E00E63D8E /* CoreData.xcdatamodel */,
+				8FC82B7B29BDF33E00E63D8E /* Model.xcdatamodel */,
+			);
+			currentVersion = 8FC82B7A29BDF33E00E63D8E /* CoreData.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 8FF5BEFA29B247CF007DC508 /* Project object */;
 }

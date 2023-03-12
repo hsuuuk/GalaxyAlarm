@@ -54,6 +54,7 @@ class AddAlarmController: UIViewController {
         datePicker.snp.makeConstraints { make in
             make.top.left.right.equalTo(view.safeAreaLayoutGuide)
         }
+        //datePicker.date = alarmData.date
         
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
@@ -69,6 +70,14 @@ class AddAlarmController: UIViewController {
     }
     
     @objc func rightBarButtonTapped() {
+        let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! AddTitleCell
+        guard let text = cell.titleTextField.text else { return }
+        if text == "" {
+            alarmData.title = "알람"
+        } else {
+            alarmData.title = text
+        }
+        
         alarmData.date = datePicker.date
         print(alarmData)
         UserNotification.shared.requset(alarm: alarmData)
@@ -90,9 +99,7 @@ extension AddAlarmController: UITableViewDataSource {
         if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "AddCell", for: indexPath) as! AddTitleCell
             cell.titleLabel.text = "제목"
-//            if let text = cell.titleTextField.text {
-//                alarmData.title = text
-//            }
+            cell.titleTextField.text = alarmData.title
             cell.backgroundColor = .systemGray6
             return cell
         } else {

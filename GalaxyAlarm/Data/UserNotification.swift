@@ -46,7 +46,7 @@ class UserNotification {
             if let error = error {
                 print("알림 등록 실패: \(error.localizedDescription)")
             } else {
-                print("알림 등록 성공")
+                //print("알림 등록 성공")
             }
         }
     }

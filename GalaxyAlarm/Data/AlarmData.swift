@@ -13,8 +13,6 @@ struct AlarmData {
     var selectDays: Set<WeekDay> = []
     var title: String = ""
     //    var sound: String
-    //    var isActive: Bool
-    //    var repeatDays: [Weekday]
     //    var snoozeTime: Int
     
     var isOn = true {

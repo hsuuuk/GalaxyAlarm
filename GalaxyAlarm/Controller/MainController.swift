@@ -13,9 +13,7 @@ class MainController: UIViewController {
     
     let tableView = UITableView(frame: .zero, style: .plain)
     var alarmList: [AlarmData] = [] {
-        didSet {
-            tableView.reloadData()
-        }
+        didSet { tableView.reloadData() }
     }
 
     override func viewDidLoad() {
@@ -47,6 +45,16 @@ class MainController: UIViewController {
         let rightBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(rightBarButtonTapped))
         rightBarButton.tintColor = .black
         navigationItem.rightBarButtonItem = rightBarButton
+        
+        navigationItem.leftBarButtonItem = editButtonItem
+        editButtonItem.tintColor = .black
+        editButtonItem.title = "편집"
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        editButtonItem.title = editing ? "완료" : "편집"
+        tableView.setEditing(editing, animated: true)
     }
     
     @objc func rightBarButtonTapped() {
@@ -62,22 +70,10 @@ extension MainController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MainCell
         cell.middayLabel.text = alarmList[indexPath.row].date.toString(format: "a")
         cell.timeLabel.text = alarmList[indexPath.row].date.toString(format: "h:mm")
-        
-//        var titleText = ""
-//        if indexPath.row == 1 {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! AddTitleCell
-//            if let text = cell.titleTextField.text {
-//                titleText = text
-//            }
-//            return cell
-//        }
-//        cell.titleLabel.text = titleText
-        
+        cell.titleLabel.text = alarmList[indexPath.row].title
         if alarmList[indexPath.row].selectDays.isEmpty {
             cell.repeatDayLabel.text = ""
         } else {
@@ -87,6 +83,7 @@ extension MainController: UITableViewDataSource {
         cell.callBackSwitchState = {
             self.alarmList[indexPath.row].isOn.toggle()
         }
+        cell.editingAccessoryType = .disclosureIndicator
         return cell
     }
     
@@ -97,13 +94,19 @@ extension MainController: UITableViewDataSource {
             success(true)
         }
         delete.backgroundColor = .systemRed
-        
         return UISwipeActionsConfiguration(actions: [delete])
     }
 }
 
 extension MainController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let contrller = AddAlarmController()
+        contrller.alarmData = alarmList[indexPath.row]
+        contrller.datePicker.date = alarmList[indexPath.row].date
+        contrller.delegate = self
+        navigationController?.present(UINavigationController(rootViewController: contrller), animated: true)
+        //tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
 extension MainController: AddAlarmControllerDelegate {
@@ -111,10 +114,3 @@ extension MainController: AddAlarmControllerDelegate {
         alarmList.append(alarmData)
     }
 }
-
-extension MainController {
-    func setUserNoti() {
-        
-    }
-}
-

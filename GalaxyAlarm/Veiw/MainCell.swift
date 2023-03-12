@@ -59,32 +59,31 @@ class MainCell: UITableViewCell {
     }
     
     func configure() {
-        addSubview(middayLabel)
+        contentView.addSubview(middayLabel)
         middayLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(20)
             make.top.equalToSuperview().offset(24)
         }
         
-        addSubview(timeLabel)
+        contentView.addSubview(timeLabel)
         timeLabel.snp.makeConstraints { make in
             make.left.equalTo(middayLabel.snp.right)
             make.top.equalToSuperview().offset(5)
         }
         
-        addSubview(titleLabel)
+        contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(middayLabel.snp.bottom).offset(5)
             make.left.equalToSuperview().offset(20)
         }
         
-        addSubview(repeatDayLabel)
+        contentView.addSubview(repeatDayLabel)
         repeatDayLabel.snp.makeConstraints { make in
             make.top.equalTo(middayLabel.snp.bottom).offset(5)
             make.left.equalTo(titleLabel.snp.right)
         }
         
         self.accessoryView = onoffSwitch
-        self.editingAccessoryType = .detailDisclosureButton
     }
 }
 

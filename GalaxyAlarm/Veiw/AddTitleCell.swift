@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class AddTitleCell: UITableViewCell {
+class AddTitleCell: UITableViewCell, UITextFieldDelegate {
     
     var titleLabel: UILabel = {
         let lb = UILabel()
@@ -46,5 +46,7 @@ class AddTitleCell: UITableViewCell {
             make.right.equalToSuperview().offset(-15)
             make.centerY.equalToSuperview()
         }
+        
+        titleTextField.delegate = self
     }
 }
