@@ -17,7 +17,7 @@ class SoundController: UIViewController {
     }
     
     func configure() {
-        view.backgroundColor = .systemGray
+        view.backgroundColor = .systemGroupedBackground
         
         navigationItem.title = "사운드"
         navigationController?.navigationBar.tintColor = .systemOrange
@@ -49,7 +49,6 @@ extension SoundController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
-        cell.backgroundColor = .systemGray6
         if indexPath.section == 0 {
             cell.textLabel?.text = "진동"
             cell.detailTextLabel?.text = "동기화됨"

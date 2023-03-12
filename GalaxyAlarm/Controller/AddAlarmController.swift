@@ -38,23 +38,22 @@ class AddAlarmController: UIViewController {
     }
     
     func configure() {
-        view.backgroundColor = .systemGray
+        view.backgroundColor = .systemGroupedBackground
         
         navigationItem.title = "알람 추가"
         
         let rightBarButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(rightBarButtonTapped))
-        rightBarButton.tintColor = .black
+        rightBarButton.tintColor = .systemOrange
         navigationItem.rightBarButtonItem = rightBarButton
         
         let leftBarButton = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(leftBarButtonTapped))
-        leftBarButton.tintColor = .black
+        leftBarButton.tintColor = .systemOrange
         navigationItem.leftBarButtonItem = leftBarButton
         
         view.addSubview(datePicker)
         datePicker.snp.makeConstraints { make in
             make.top.left.right.equalTo(view.safeAreaLayoutGuide)
         }
-        //datePicker.date = alarmData.date
         
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
@@ -100,11 +99,9 @@ extension AddAlarmController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "AddCell", for: indexPath) as! AddTitleCell
             cell.titleLabel.text = "제목"
             cell.titleTextField.text = alarmData.title
-            cell.backgroundColor = .systemGray6
             return cell
         } else {
             var cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
-            cell.backgroundColor = .systemGray6
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "반복"

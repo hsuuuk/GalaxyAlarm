@@ -22,8 +22,6 @@ class MainController: UIViewController {
     }
     
     func configure() {
-        view.backgroundColor = .white
-        
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.top.left.bottom.right.equalToSuperview()
@@ -34,20 +32,21 @@ class MainController: UIViewController {
         tableView.rowHeight = 100
         
         navigationItem.title = "알람"
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         navigationController?.navigationBar.prefersLargeTitles = true
         
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .white
+        appearance.backgroundColor = .black
         appearance.shadowColor = .clear
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         
         let rightBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(rightBarButtonTapped))
-        rightBarButton.tintColor = .black
+        rightBarButton.tintColor = .systemOrange
         navigationItem.rightBarButtonItem = rightBarButton
         
         navigationItem.leftBarButtonItem = editButtonItem
-        editButtonItem.tintColor = .black
+        editButtonItem.tintColor = .systemOrange
         editButtonItem.title = "편집"
     }
     

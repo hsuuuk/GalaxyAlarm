@@ -14,13 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
             if granted {
-                print("알림 권한 허용")
+                //print("알림 권한 허용")
             } else {
                 print("알림 권한 거부")
             }
         }
         UNUserNotificationCenter.current().delegate = self
-        
+
         return true
     }
     

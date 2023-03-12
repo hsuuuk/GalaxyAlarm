@@ -25,14 +25,12 @@ class MainCell: UITableViewCell {
     var titleLabel: UILabel = {
         let lb = UILabel()
         lb.font = UIFont.systemFont(ofSize: 15)
-        lb.text = "알람"
         return lb
     }()
     
     var repeatDayLabel: UILabel = {
         let lb = UILabel()
         lb.font = UIFont.systemFont(ofSize: 15)
-        lb.text = "매일"
         return lb
     }()
     

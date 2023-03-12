@@ -27,7 +27,7 @@ class RepeatController: UIViewController {
     }
     
     func configure() {
-        view.backgroundColor = .systemGray
+        view.backgroundColor = .systemGroupedBackground
         
         navigationItem.title = "반복"
         navigationController?.navigationBar.tintColor = .systemOrange
@@ -51,7 +51,6 @@ extension RepeatController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
         let day = WeekDay.allCases[indexPath.row]
-        cell.backgroundColor = .systemGray6
         cell.textLabel?.text = day.dayString
         let isSelected = selectedDay.contains(day)
         cell.accessoryType = isSelected ? .checkmark : .none

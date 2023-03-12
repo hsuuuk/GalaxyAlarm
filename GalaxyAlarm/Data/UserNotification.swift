@@ -7,6 +7,7 @@
 
 import UIKit
 import UserNotifications
+import AVFoundation
 
 class UserNotification {
     
@@ -18,7 +19,7 @@ class UserNotification {
     func requset(alarm: AlarmData) {
         content.title = "알람"
         content.body = "알람 내용"
-        content.sound = UNNotificationSound.default
+        content.sound = UNNotificationSound(named: UNNotificationSoundName("original.wav"))
         
         let calender = Calendar.current
         let hour = calender.component(.hour, from: alarm.date)
