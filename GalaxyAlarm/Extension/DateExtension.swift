@@ -13,4 +13,12 @@ extension Date {
         formatter.dateFormat = format
         return formatter.string(from: self)
     }
+    
+    static func zeroSecond() -> Date {
+        let calendar = Calendar.current
+        var dateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
+        dateComponents.second = 0
+        let date = calendar.date(from: dateComponents)
+        return date!
+    }
 }

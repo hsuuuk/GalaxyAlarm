@@ -6,33 +6,42 @@
 //
 
 import UIKit
+import UserNotifications
 
 struct AlarmData {
-    var date: Date
-//    var title: String
-//    var sound: String
-//    var isActive: Bool
-//    var repeatDays: [Weekday]
-//    var snoozeTime: Int
+    var date = Date()
+    var selectDays: Set<WeekDay> = []
+    var title: String = ""
+    //    var sound: String
+    //    var isActive: Bool
+    //    var repeatDays: [Weekday]
+    //    var snoozeTime: Int
     
-//    static func createTime(hour: Int, minute: Int) -> Date {
-//        let currentDate = Date()
-//        let calendar = Calendar.current
-//        //let dateComponent = DateComponents
-//        let dateComponents = calendar.dateComponents([.year, .month, .day], from: currentDate)
-//
-//        var newDateComponents = DateComponents()
-//        newDateComponents.year = dateComponents.year
-//        newDateComponents.month = dateComponents.month
-//        newDateComponents.day = dateComponents.day
-//        newDateComponents.hour = hour
-//        newDateComponents.minute = minute
-//
-//        let newDate = calendar.date(from: newDateComponents)!
-//        return newDate
-//    }
+    var isOn = true {
+        didSet {
+            if isOn {
+                UserNotification.shared.requset(alarm: self)
+            } else {
+                UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+            }
+        }
+    }
+    
+    var repeatDay: String {
+        switch selectDays {
+        case [.Sat, .Sun]:
+            return "주말"
+        case [.Sun, .Mon, .Tue, .Wed, .Thu, .Fri, .Sat]:
+            return "매일"
+        case [.Mon, .Tue, .Wed, .Thu, .Fri]:
+            return "주중"
+        case []:
+            return "안함"
+        default:
+            let day = selectDays.sorted(by: { $0.rawValue < $1.rawValue }).map{ $0.dayText }.joined(separator: " ")
+            return day
+        }
+    }
 }
 
-enum Weekday: Int {
-    case sunday, monday, tuesday, wednesday, thursday, friday, saturday
-}

@@ -13,9 +13,24 @@ protocol AddAlarmControllerDelegate: AnyObject {
 
 class AddAlarmController: UIViewController {
     
-    var alarmData: AlarmData?
-    let datePicker = UIDatePicker()
+    let tableView = UITableView(frame: .zero, style: .insetGrouped)
+    
+    var alarmData = AlarmData() {
+        didSet { tableView.reloadData() }
+    }
+    
     weak var delegate: AddAlarmControllerDelegate?
+    
+    let datePicker: UIDatePicker = {
+        let picker = UIDatePicker()
+        picker.preferredDatePickerStyle = .wheels
+        picker.datePickerMode = .time
+        picker.locale = Locale(identifier: "ko-KR")
+        picker.setValue(UIColor.white, forKeyPath: "textColor")
+        picker.timeZone = .autoupdatingCurrent
+        picker.date = Date.zeroSecond()
+        return picker
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,25 +50,18 @@ class AddAlarmController: UIViewController {
         leftBarButton.tintColor = .black
         navigationItem.leftBarButtonItem = leftBarButton
         
-        datePicker.preferredDatePickerStyle = .wheels
-        datePicker.datePickerMode = .time
-        datePicker.locale = Locale(identifier: "ko-KR")
-        datePicker.setValue(UIColor.white, forKeyPath: "textColor")
-        datePicker.date = Date()
-        datePicker.timeZone = .autoupdatingCurrent
         view.addSubview(datePicker)
         datePicker.snp.makeConstraints { make in
             make.top.left.right.equalTo(view.safeAreaLayoutGuide)
         }
         
-        let tableView = UITableView(frame: .zero, style: .insetGrouped)
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.top.equalTo(datePicker.snp.bottom).offset(-25)
             make.left.bottom.right.equalToSuperview()
         }
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.register(AddCell.self, forCellReuseIdentifier: "AddCell")
+        tableView.register(AddTitleCell.self, forCellReuseIdentifier: "AddCell")
         tableView.dataSource = self
         tableView.delegate = self
         tableView.isScrollEnabled = false
@@ -61,11 +69,11 @@ class AddAlarmController: UIViewController {
     }
     
     @objc func rightBarButtonTapped() {
-        alarmData = AlarmData(date: datePicker.date)
-        if let alarmData = alarmData {
-            delegate?.saveAlarmInfo(alarmData: alarmData)
-            navigationController?.dismiss(animated: true)
-        }
+        alarmData.date = datePicker.date
+        print(alarmData)
+        UserNotification.shared.requset(alarm: alarmData)
+        delegate?.saveAlarmInfo(alarmData: alarmData)
+        navigationController?.dismiss(animated: true)
     }
     
     @objc func leftBarButtonTapped() {
@@ -80,17 +88,20 @@ extension AddAlarmController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "AddCell", for: indexPath) as! AddCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AddCell", for: indexPath) as! AddTitleCell
+            cell.titleLabel.text = "제목"
+//            if let text = cell.titleTextField.text {
+//                alarmData.title = text
+//            }
             cell.backgroundColor = .systemGray6
             return cell
         } else {
             var cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
             cell.backgroundColor = .systemGray6
-            
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "반복"
-                cell.detailTextLabel?.text = "안 함"
+                cell.detailTextLabel?.text = alarmData.repeatDay
                 cell.accessoryType = .disclosureIndicator
             case 2:
                 cell.textLabel?.text = "사운드"
@@ -114,9 +125,19 @@ extension AddAlarmController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.item {
         case 0:
-            navigationController?.pushViewController(RepeatController(), animated: true)
+            let controller = RepeatController()
+            controller.delegate = self
+            controller.selectedDay = alarmData.selectDays
+            navigationController?.pushViewController(controller, animated: true)
         default :
             navigationController?.pushViewController(SoundController(), animated: true)
         }
+    }
+}
+
+extension AddAlarmController: RepeatControllerDelegate {
+    func updateWeekday(selectedDay: Set<WeekDay>) {
+        print(selectedDay)
+        alarmData.selectDays = selectedDay
     }
 }

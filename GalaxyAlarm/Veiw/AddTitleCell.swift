@@ -8,11 +8,10 @@
 import UIKit
 import SnapKit
 
-class AddCell: UITableViewCell {
+class AddTitleCell: UITableViewCell {
     
     var titleLabel: UILabel = {
         let lb = UILabel()
-        lb.text = "레이블"
         return lb
     }()
     

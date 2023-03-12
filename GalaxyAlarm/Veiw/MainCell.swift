@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class Cell: UITableViewCell {
+class MainCell: UITableViewCell {
     
     var middayLabel: UILabel = {
         let lb = UILabel()
@@ -22,11 +22,27 @@ class Cell: UITableViewCell {
         return lb
     }()
     
-    var dayLabel: UILabel = {
+    var titleLabel: UILabel = {
         let lb = UILabel()
         lb.font = UIFont.systemFont(ofSize: 15)
-        lb.text = "알람, 매일"
+        lb.text = "알람"
         return lb
+    }()
+    
+    var repeatDayLabel: UILabel = {
+        let lb = UILabel()
+        lb.font = UIFont.systemFont(ofSize: 15)
+        lb.text = "매일"
+        return lb
+    }()
+    
+    var callBackSwitchState: (() -> ())?
+    
+    let onoffSwitch: UISwitch = {
+        let sw = UISwitch(frame: .zero)
+        sw.addTarget(self, action: #selector(switchChanged), for: .valueChanged)
+        sw.isOn = true
+        return sw
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -36,6 +52,10 @@ class Cell: UITableViewCell {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    @objc func switchChanged() {
+        callBackSwitchState?()
     }
     
     func configure() {
@@ -51,11 +71,21 @@ class Cell: UITableViewCell {
             make.top.equalToSuperview().offset(5)
         }
         
-        addSubview(dayLabel)
-        dayLabel.snp.makeConstraints { make in
+        addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
             make.top.equalTo(middayLabel.snp.bottom).offset(5)
             make.left.equalToSuperview().offset(20)
         }
+        
+        addSubview(repeatDayLabel)
+        repeatDayLabel.snp.makeConstraints { make in
+            make.top.equalTo(middayLabel.snp.bottom).offset(5)
+            make.left.equalTo(titleLabel.snp.right)
+        }
+        
+        self.accessoryView = onoffSwitch
+        self.editingAccessoryType = .detailDisclosureButton
     }
 }
+
 

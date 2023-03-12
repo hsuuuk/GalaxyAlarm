@@ -48,7 +48,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
         print("앱 실행중일 때, 푸시 알림이 생성되면 발생하는 메서드")
-        //completionHandler([[.alert, .sound, .badge]])
+        completionHandler([[.alert, .sound, .badge]])
     }
 }
 

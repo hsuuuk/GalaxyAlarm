@@ -8,18 +8,22 @@
 import UIKit
 
 protocol RepeatControllerDelegate: AnyObject {
-    func updateDay(controller: RepeatController, dayBool: [Bool])
+    func updateWeekday(selectedDay: Set<WeekDay>)
 }
 
 class RepeatController: UIViewController {
     
-    let day = ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"]
+    var selectedDay: Set<WeekDay> = []
     
     weak var delegate: RepeatControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        delegate?.updateWeekday(selectedDay: selectedDay)
     }
     
     func configure() {
@@ -41,24 +45,32 @@ class RepeatController: UIViewController {
 
 extension RepeatController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return WeekDay.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
+        let day = WeekDay.allCases[indexPath.row]
         cell.backgroundColor = .systemGray6
-        cell.textLabel?.text = day[indexPath.row]
+        cell.textLabel?.text = day.dayString
+        let isSelected = selectedDay.contains(day)
+        cell.accessoryType = isSelected ? .checkmark : .none
+        cell.tintColor = .systemOrange
         return cell
     }
 }
 
 extension RepeatController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) else { return }
-        cell.tintColor = .systemOrange
-        let isCellChecked = (cell.accessoryType == .none)
-        cell.accessoryType = isCellChecked ? .checkmark : .none
+        let day = WeekDay.allCases[indexPath.row]
+        if selectedDay.contains(day) {
+            selectedDay.remove(day)
+        } else {
+            selectedDay.update(with: day)
         }
+        
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
 }
     
 
