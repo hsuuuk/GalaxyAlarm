@@ -106,7 +106,7 @@ extension MainController: UITableViewDelegate {
         contrller.indexPathRow = indexPath.row
         dataManager.isEdit = true
         navigationController?.present(UINavigationController(rootViewController: contrller), animated: true)
-        //tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
@@ -118,5 +118,11 @@ extension MainController: AddAlarmControllerDelegate {
             dataManager.edit(alarmData: alarmData, index: index)
         }
         tableView.reloadData()
+    }
+}
+
+extension MainController: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("알람 실행")
     }
 }
