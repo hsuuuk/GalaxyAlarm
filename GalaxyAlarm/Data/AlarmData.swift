@@ -8,7 +8,7 @@
 import UIKit
 import UserNotifications
 
-struct AlarmData {
+struct AlarmData: Codable {
     var date = Date()
     var selectDays: Set<WeekDay> = []
     var title: String = ""

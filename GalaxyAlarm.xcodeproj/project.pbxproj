@@ -20,6 +20,7 @@
 		8FC82B7829BDF29B00E63D8E /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC82B7729BDF29B00E63D8E /* CoreDataManager.swift */; };
 		8FC82B7C29BDF33E00E63D8E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8FC82B7929BDF33E00E63D8E /* Model.xcdatamodeld */; };
 		8FC82B8729BE063200E63D8E /* original.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8FC82B8629BE063200E63D8E /* original.wav */; };
+		8FC82B8929BF4E9900E63D8E /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC82B8829BF4E9900E63D8E /* DataManager.swift */; };
 		8FF5BF0629B247CF007DC508 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF5BF0529B247CF007DC508 /* AppDelegate.swift */; };
 		8FF5BF0829B247CF007DC508 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF5BF0729B247CF007DC508 /* SceneDelegate.swift */; };
 		8FF5BF0F29B247D1007DC508 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FF5BF0E29B247D1007DC508 /* Assets.xcassets */; };
@@ -43,6 +44,7 @@
 		8FC82B7A29BDF33E00E63D8E /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
 		8FC82B7B29BDF33E00E63D8E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		8FC82B8629BE063200E63D8E /* original.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = original.wav; path = ../../../../../Downloads/original.wav; sourceTree = "<group>"; };
+		8FC82B8829BF4E9900E63D8E /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		8FF5BF0229B247CF007DC508 /* GalaxyAlarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GalaxyAlarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FF5BF0529B247CF007DC508 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FF5BF0729B247CF007DC508 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				8FAA55A029B2ED270043CED4 /* AlarmData.swift */,
+				8FC82B8829BF4E9900E63D8E /* DataManager.swift */,
 				8FC82B7529BD6BEF00E63D8E /* WeekDay.swift */,
 				8FC82B7329BAD21100E63D8E /* UserNotification.swift */,
 				8FC82B7729BDF29B00E63D8E /* CoreDataManager.swift */,
@@ -283,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FF5BF1A29B247D8007DC508 /* MainCell.swift in Sources */,
+				8FC82B8929BF4E9900E63D8E /* DataManager.swift in Sources */,
 				8FC82B7229BAD1E900E63D8E /* DateExtension.swift in Sources */,
 				8FC82B7629BD6BF000E63D8E /* WeekDay.swift in Sources */,
 				8FC82B7C29BDF33E00E63D8E /* Model.xcdatamodeld in Sources */,

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol AddAlarmControllerDelegate: AnyObject {
-    func saveAlarmInfo(alarmData: AlarmData)
+    func save(alarmData: AlarmData, index: Int)
 }
 
 class AddAlarmController: UIViewController {
@@ -20,6 +20,8 @@ class AddAlarmController: UIViewController {
     }
     
     weak var delegate: AddAlarmControllerDelegate?
+    
+    var indexPathRow = 0
     
     let datePicker: UIDatePicker = {
         let picker = UIDatePicker()
@@ -80,7 +82,7 @@ class AddAlarmController: UIViewController {
         alarmData.date = datePicker.date
         print(alarmData)
         UserNotification.shared.requset(alarm: alarmData)
-        delegate?.saveAlarmInfo(alarmData: alarmData)
+        delegate?.save(alarmData: alarmData, index: indexPathRow)
         navigationController?.dismiss(animated: true)
     }
     

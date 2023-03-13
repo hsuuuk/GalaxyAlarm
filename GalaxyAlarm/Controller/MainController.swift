@@ -12,9 +12,8 @@ import UserNotifications
 class MainController: UIViewController {
     
     let tableView = UITableView(frame: .zero, style: .plain)
-    var alarmList: [AlarmData] = [] {
-        didSet { tableView.reloadData() }
-    }
+    
+    var dataManager = DataManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,28 +58,29 @@ class MainController: UIViewController {
     @objc func rightBarButtonTapped() {
         let controller = AddAlarmController()
         controller.delegate = self
+        dataManager.isEdit = false
         navigationController?.present(UINavigationController(rootViewController: controller), animated: true)
     }
 }
 
 extension MainController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return alarmList.count
+        return dataManager.alarmList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MainCell
-        cell.middayLabel.text = alarmList[indexPath.row].date.toString(format: "a")
-        cell.timeLabel.text = alarmList[indexPath.row].date.toString(format: "h:mm")
-        cell.titleLabel.text = alarmList[indexPath.row].title
-        if alarmList[indexPath.row].selectDays.isEmpty {
+        cell.middayLabel.text = dataManager.alarmList[indexPath.row].date.toString(format: "a")
+        cell.timeLabel.text = dataManager.alarmList[indexPath.row].date.toString(format: "h:mm")
+        cell.titleLabel.text = dataManager.alarmList[indexPath.row].title
+        if dataManager.alarmList[indexPath.row].selectDays.isEmpty {
             cell.repeatDayLabel.text = ""
         } else {
-            cell.repeatDayLabel.text = (", \(alarmList[indexPath.row].repeatDay)")
+            cell.repeatDayLabel.text = (", \(dataManager.alarmList[indexPath.row].repeatDay)")
         }
-        cell.onoffSwitch.isOn = alarmList[indexPath.row].isOn
+        cell.onoffSwitch.isOn = dataManager.alarmList[indexPath.row].isOn
         cell.callBackSwitchState = {
-            self.alarmList[indexPath.row].isOn.toggle()
+            self.dataManager.alarmList[indexPath.row].isOn.toggle()
         }
         cell.editingAccessoryType = .disclosureIndicator
         return cell
@@ -88,7 +88,7 @@ extension MainController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .normal, title: "삭제") { (_, _, success: @escaping (Bool) -> Void) in
-            self.alarmList.remove(at: indexPath.row)
+            self.dataManager.remove(index: indexPath.row)
             self.tableView.reloadData()
             success(true)
         }
@@ -100,16 +100,23 @@ extension MainController: UITableViewDataSource {
 extension MainController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let contrller = AddAlarmController()
-        contrller.alarmData = alarmList[indexPath.row]
-        contrller.datePicker.date = alarmList[indexPath.row].date
+        contrller.alarmData = dataManager.alarmList[indexPath.row]
+        contrller.datePicker.date = dataManager.alarmList[indexPath.row].date
         contrller.delegate = self
+        contrller.indexPathRow = indexPath.row
+        dataManager.isEdit = true
         navigationController?.present(UINavigationController(rootViewController: contrller), animated: true)
         //tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
 extension MainController: AddAlarmControllerDelegate {
-    func saveAlarmInfo(alarmData: AlarmData) {
-        alarmList.append(alarmData)
+    func save(alarmData: AlarmData, index: Int) {
+        if dataManager.isEdit == false {
+            dataManager.add(alarmData: alarmData)
+        } else {
+            dataManager.edit(alarmData: alarmData, index: index)
+        }
+        tableView.reloadData()
     }
 }
