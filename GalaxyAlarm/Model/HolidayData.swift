@@ -30,7 +30,7 @@ struct Items: Codable {
 // MARK: - Item
 struct Item: Codable {
     let holidayDate: Int
-    
+
     enum CodingKeys: String, CodingKey {
         case holidayDate = "locdate"
     }

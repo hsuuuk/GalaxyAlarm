@@ -14,6 +14,7 @@ struct AlarmData: Codable {
     var title: String = ""
     //    var sound: String
     //    var snoozeTime: Int
+    var holidayIsOn = false
     
     var isOn = true {
         didSet {
@@ -22,6 +23,7 @@ struct AlarmData: Codable {
             } else {
                 UNUserNotificationCenter.current().removeAllDeliveredNotifications()
                 UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                print("모든 알림 삭제")
             }
         }
     }

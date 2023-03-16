@@ -34,6 +34,11 @@ class AddAlarmController: UIViewController {
         return picker
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.title = "알람 추가"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
@@ -41,8 +46,6 @@ class AddAlarmController: UIViewController {
     
     func configure() {
         view.backgroundColor = .systemGroupedBackground
-        
-        navigationItem.title = "알람 추가"
         
         let rightBarButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(rightBarButtonTapped))
         rightBarButton.tintColor = .systemOrange
@@ -80,14 +83,17 @@ class AddAlarmController: UIViewController {
         }
         
         alarmData.date = datePicker.date
-        print(alarmData)
-        UserNotification.shared.requset(alarm: alarmData)
         delegate?.save(alarmData: alarmData, index: indexPathRow)
         navigationController?.dismiss(animated: true)
+        print(alarmData)
     }
     
     @objc func leftBarButtonTapped() {
         navigationController?.dismiss(animated: true)
+    }
+    
+    @objc func switchChanged() {
+        alarmData.holidayIsOn.toggle()
     }
 }
 
@@ -120,7 +126,13 @@ extension AddAlarmController: UITableViewDataSource {
             default:
                 cell.textLabel?.text = "공휴일엔 알람 끄기"
                 let switchButton = UISwitch()
-                cell.accessoryView = switchButton
+                if alarmData.selectDays.isEmpty {
+                    cell.accessoryView = nil
+                } else {
+                    switchButton.isOn = alarmData.holidayIsOn
+                    switchButton.addTarget(self, action: #selector(switchChanged), for: .valueChanged)
+                    cell.accessoryView = switchButton
+                }
             }
             return cell
         }
@@ -135,15 +147,15 @@ extension AddAlarmController: UITableViewDelegate {
             controller.delegate = self
             controller.selectedDay = alarmData.selectDays
             navigationController?.pushViewController(controller, animated: true)
-        default :
+        case 2 :
             navigationController?.pushViewController(SoundController(), animated: true)
+        default : break
         }
     }
 }
 
 extension AddAlarmController: RepeatControllerDelegate {
     func updateWeekday(selectedDay: Set<WeekDay>) {
-        print(selectedDay)
         alarmData.selectDays = selectedDay
     }
 }

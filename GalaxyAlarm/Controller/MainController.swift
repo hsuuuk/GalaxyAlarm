@@ -13,7 +13,7 @@ class MainController: UIViewController {
     
     let tableView = UITableView(frame: .zero, style: .plain)
     
-    var dataManager = DataManager()
+    var dataManager = DataManager.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,18 +70,39 @@ extension MainController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MainCell
-        cell.middayLabel.text = dataManager.alarmList[indexPath.row].date.toString(format: "a")
-        cell.timeLabel.text = dataManager.alarmList[indexPath.row].date.toString(format: "h:mm")
-        cell.titleLabel.text = dataManager.alarmList[indexPath.row].title
-        if dataManager.alarmList[indexPath.row].selectDays.isEmpty {
+        var alarmData = dataManager.alarmList[indexPath.row]
+        
+        cell.middayLabel.text = alarmData.date.toString(format: "a")
+        cell.timeLabel.text = alarmData.date.toString(format: "h:mm")
+        cell.titleLabel.text = alarmData.title
+        if alarmData.selectDays.isEmpty {
             cell.repeatDayLabel.text = ""
         } else {
-            cell.repeatDayLabel.text = (", \(dataManager.alarmList[indexPath.row].repeatDay)")
+            cell.repeatDayLabel.text = (", \(alarmData.repeatDay)")
         }
-        cell.onoffSwitch.isOn = dataManager.alarmList[indexPath.row].isOn
+        cell.onoffSwitch.isOn = alarmData.isOn
+
         cell.callBackSwitchState = {
-            self.dataManager.alarmList[indexPath.row].isOn.toggle()
+            alarmData.isOn.toggle()
+            
+            if alarmData.repeatDay == "매일" {
+                if alarmData.isOn {
+                } else {
+                    let alert = UIAlertController(title: "알람", message: "내일 알람을 다시 켜겠습니까?", preferredStyle: .actionSheet)
+                    
+                    alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
+                        let nextDayDate = Date.nextDayDate(alarmDate: alarmData.date)
+                        alarmData.date = nextDayDate
+                        UserNotification.shared.requset(alarm: alarmData)
+                        // 확인 버튼을 누르면 내일 다시 울리는 알림은 설정했지만, switch가 자동으로 on으로 변경되는 기능은 구현 못함.
+                    }))
+                    
+                    alert.addAction(UIAlertAction(title: "취소", style: .destructive, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
         }
+        
         cell.editingAccessoryType = .disclosureIndicator
         return cell
     }
@@ -114,8 +135,12 @@ extension MainController: AddAlarmControllerDelegate {
     func save(alarmData: AlarmData, index: Int) {
         if dataManager.isEdit == false {
             dataManager.add(alarmData: alarmData)
+            UserNotification.shared.requset(alarm: alarmData)
         } else {
             dataManager.edit(alarmData: alarmData, index: index)
+            if alarmData.isOn {
+                UserNotification.shared.requset(alarm: alarmData)
+            }
         }
         tableView.reloadData()
     }
